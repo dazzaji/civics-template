@@ -124,7 +124,11 @@ Each CLI automatically reads its instruction file (`CLAUDE.md`, `AGENTS.md`, or 
 
 ## Phase 6: Assign Tasks
 
-Give each agent a task that references your `dev_plan.md`:
+You have two workflow options:
+
+### Option A: Divide and Conquer (Different Tasks)
+
+Each agent works on a different part of the project:
 
 **Claude Code (Window 1):**
 ```
@@ -141,7 +145,21 @@ Read dev_plan.md and implement the sidebar component as described in section 2.
 Read dev_plan.md and implement the footer component as described in section 3.
 ```
 
+### Option B: Competitive Build (Same Task, Best-of-Breed)
+
+All agents implement the **entire project** independently. You then compare implementations and synthesize the best parts of each.
+
+**Give the same prompt to all three agents:**
+```
+Read dev_plan.md and implement the complete project as specified.
+Commit your work when done and push to your branch.
+```
+
+This produces 3 complete implementations you can compare. Proceed to Phase 7B for the cross-review workflow.
+
 ## Phase 7: Review and Merge
+
+### Option 7A: Standard Review (for Divide and Conquer)
 
 When agents complete their work:
 
@@ -149,6 +167,99 @@ When agents complete their work:
 2. Go to GitHub and create PRs from each agent branch to `main`
 3. Review each PR
 4. Merge the ones you approve
+
+### Option 7B: Cross-Agent Review (for Competitive Build)
+
+Have each agent review the others' implementations to identify the best ideas:
+
+**Step 1: Create PRs for all three implementations**
+```bash
+# In the main repo, create PRs (or do this on GitHub)
+gh pr create --head agent/claude-task --title "Claude implementation"
+gh pr create --head agent/codex-task --title "Codex implementation"
+gh pr create --head agent/gemini-task --title "Gemini implementation"
+```
+
+**Step 2: Have each agent review the other PRs**
+
+In **Claude Code's window**, ask:
+```
+Review the PRs from the other agents:
+- Run: git fetch origin
+- Run: git diff main..origin/agent/codex-task
+- Run: git diff main..origin/agent/gemini-task
+
+Compare their implementations to yours. Identify:
+1. What they did better than you
+2. What you did better than them
+3. Bugs or issues in their code
+4. Ideas worth adopting
+
+Write your review as a comment. Be specific with file paths and line numbers.
+```
+
+In **Codex's window**, ask:
+```
+Review the PRs from the other agents:
+- Run: git fetch origin
+- Run: git diff main..origin/agent/claude-task
+- Run: git diff main..origin/agent/gemini-task
+
+Compare their implementations to yours. Identify:
+1. What they did better than you
+2. What you did better than them
+3. Bugs or issues in their code
+4. Ideas worth adopting
+
+Write your review as a comment. Be specific with file paths and line numbers.
+```
+
+In **Gemini's window**, ask:
+```
+Review the PRs from the other agents:
+- Run: git fetch origin
+- Run: git diff main..origin/agent/claude-task
+- Run: git diff main..origin/agent/codex-task
+
+Compare their implementations to yours. Identify:
+1. What they did better than you
+2. What you did better than them
+3. Bugs or issues in their code
+4. Ideas worth adopting
+
+Write your review as a comment. Be specific with file paths and line numbers.
+```
+
+**Step 3: Synthesize the best implementation**
+
+After reading all reviews, choose one of these approaches:
+
+**A) Pick a winner and enhance:**
+Pick the best overall implementation as your base, then ask that agent:
+```
+Based on the reviews, incorporate the best ideas from the other implementations:
+- [List specific improvements from other agents]
+Update your code and push.
+```
+
+**B) Create a synthesis branch:**
+Create a new worktree for the final version:
+```bash
+./tools/worktree/worktreectl.sh create final-synthesis
+```
+
+Then ask one agent to synthesize:
+```
+Create the best-of-breed implementation by combining:
+- From Claude's PR: [specific features/approaches]
+- From Codex's PR: [specific features/approaches]
+- From Gemini's PR: [specific features/approaches]
+
+Cherry-pick or reimplement the best parts from each.
+```
+
+**Step 4: Final review and merge**
+Once you have your synthesized best version, merge it to `main`.
 
 ## Phase 8: Cleanup
 
