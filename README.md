@@ -2,6 +2,32 @@
 
 <!-- Replace with your project description -->
 
+---
+
+## ⚡ Lightning Start
+
+Get three AI agents working in parallel in under 2 minutes:
+
+```bash
+# 1. Clone your new repo (after creating it from the template on GitHub)
+# 2. Open terminal in the repo folder, then run:
+./init-agents.sh
+```
+
+**That's it!** Three VS Code windows will open automatically—one for each agent (Claude, Codex, Gemini). In each window, open the terminal and run the corresponding CLI:
+
+| Window | Run this |
+|--------|----------|
+| Claude | `claude` |
+| Codex | `codex` |
+| Gemini | `gemini` |
+
+Give each agent their task, and you're off to the races. 🏎️
+
+> **📖 Need more control?** The rest of this README walks through the manual setup process step-by-step. Use it if you want to customize agent names, run fewer agents, or understand what's happening under the hood.
+
+---
+
 ## Getting Started
 
 <!-- Add your project-specific setup instructions here -->
@@ -26,6 +52,7 @@ code ../.worktrees/<repo>/worktree_<agent-name>
 
 ```
 .
+├── init-agents.sh      # ⚡ One-click setup script
 ├── AGENTS.md           # Codex instructions (also generic agents)
 ├── CLAUDE.md           # Claude Code instructions
 ├── GEMINI.md           # Gemini CLI instructions
@@ -43,9 +70,11 @@ code ../.worktrees/<repo>/worktree_<agent-name>
 
 ---
 
-# Step-by-Step User Guide
+# Manual Setup Guide
 
-How to run multiple AI coding agents (Claude Code, Codex, Gemini CLI) in parallel on the same project.
+The detailed walkthrough below explains the manual process. Use this if you want to customize your setup, understand how worktrees work, or troubleshoot issues.
+
+> **⚠️ Template Placeholders:** If following the manual process, remember to replace example paths like `widget-frontend` with your actual project name throughout.
 
 ## Phase 1: Create a Repo from This Template
 
@@ -280,6 +309,7 @@ cd ~/Documents/GitHub/widget-frontend
 | Create repo | GitHub → Use template → Create |
 | Clone | GitHub Desktop → Clone |
 | Add code | Copy files, create `dev_plan.md`, commit to `main` |
+| **Lightning Start** | `./init-agents.sh` (does steps below automatically) |
 | Create worktrees | `./tools/worktree/worktreectl.sh create <name>` × 3 |
 | Open windows | `code ../.worktrees/<repo>/worktree_<name>` × 3 |
 | Start CLIs | `claude`, `codex`, `gemini` in each window |
