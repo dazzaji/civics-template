@@ -14,6 +14,8 @@ Get three AI agents working in parallel in under 2 minutes:
 ./init-agents.sh
 ```
 
+> **🚨 Getting "Permission denied"?** Run `chmod +x init-agents.sh` first, then try again. (This is rare—cloning from the template should preserve permissions.)
+
 **That's it!** Three VS Code windows will open automatically—one for each agent (Claude, Codex, Gemini). In each window, open the terminal and run the corresponding CLI:
 
 | Window | Run this |
