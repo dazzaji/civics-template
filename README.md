@@ -8,7 +8,13 @@
 
 ## Multi-Agent Development
 
-This repo is configured for parallel AI agent development. See [AGENTS.md](AGENTS.md) for instructions on running multiple AI CLIs (Claude Code, Codex, etc.) simultaneously.
+This repo is configured for parallel AI agent development. Each AI CLI reads its own instruction file:
+
+| CLI | Instruction File |
+|-----|------------------|
+| Claude Code | [CLAUDE.md](CLAUDE.md) |
+| OpenAI Codex | [AGENTS.md](AGENTS.md) |
+| Gemini CLI | [GEMINI.md](GEMINI.md) |
 
 **Quick start for agents:**
 ```bash
@@ -20,12 +26,15 @@ code ../.worktrees/<repo>/worktree_<agent-name>
 
 ```
 .
-├── AGENTS.md           # Multi-agent workflow instructions
+├── AGENTS.md           # Codex instructions (also generic agents)
+├── CLAUDE.md           # Claude Code instructions
+├── GEMINI.md           # Gemini CLI instructions
 ├── README.md           # This file
 └── tools/
     └── worktree/       # Git worktree management scripts
         ├── worktreectl.sh
-        └── create_worktree.sh
+        ├── create_worktree.sh
+        └── README.md
 ```
 
 ## License

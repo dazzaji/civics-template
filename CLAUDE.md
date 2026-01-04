@@ -1,6 +1,6 @@
-# Agent Instructions
+# Claude Code Instructions
 
-You are an AI coding agent (Codex, or any agent reading AGENTS.md) working in this repository.
+You are an AI coding agent (Claude Code) working in this repository.
 
 ## Multi-Agent Environment
 
@@ -22,10 +22,6 @@ You are an AI coding agent (Codex, or any agent reading AGENTS.md) working in th
 - **Your path**: `../.worktrees/<repo>/worktree_<your-task-name>/`
 - **Stay in your directory**: Never `cd` to another agent's worktree
 - **Avoid `git checkout`**: Your branch is already checked out in your worktree
-
-## Why Worktrees?
-
-When two agents share a VS Code window and one runs `git checkout`, BOTH agents end up on the same branch. Worktrees solve this by giving each agent its own directory with its own branch checkout.
 
 ## Worktree Commands
 
@@ -74,13 +70,6 @@ npm run dev
 - Use TypeScript strict mode
 - Prefer functional components
 - Run `npm run lint` before committing
--->
-
-## Testing
-
-<!-- Example:
-- Run `npm test` before opening a PR
-- Framework: Jest + React Testing Library
 -->
 
 ## Architecture
